@@ -1,5 +1,6 @@
-from modules.gmail import Gmail
+from modules.notifications.gmail import Gmail
 from modules.config.configuration import config
+
 
 def send_sms(shorturl):
     gmail = Gmail(config.gmail_address, config.app_password)

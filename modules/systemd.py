@@ -1,6 +1,3 @@
-# lol this is so stupid
-# it prints out messages that look like systemd startup logs or something 
-
 from modules.colors.ansi_codes import RESET, RED, GREEN, BLUE, YELLOW, WHITE, PURPLE, CYAN, LIGHT_CYAN, SUPER_LIGHT_CYAN, ORANGE, ansi_is_supported
 
 class Logger:

@@ -3,7 +3,7 @@ import os
 import shutil
 import subprocess
 from modules.colors.ansi_codes import RESET, RED, GREEN, BLUE, YELLOW, WHITE, PURPLE, CYAN, LIGHT_CYAN, SUPER_LIGHT_CYAN, ORANGE, ansi_is_supported
-import modules.versioning_tools as versioning_tools
+from modules.config.configuration import local_version, remote_version
 
 BACKUP_FOLDER_PREFIX = "version-"
 
@@ -42,8 +42,8 @@ def check_for_updates():
     print(f"\n{BLUE}Checking for updates...{RESET}")
     
     try:
-        remote_version = versioning_tools.get_remote_version()
-        local_version = versioning_tools.get_local_version()
+        # remote_version = versioning_tools.get_remote_version()
+        # local_version = versioning_tools.get_local_version()
         
         if remote_version > local_version:
             print(f"{YELLOW}Update available: {local_version} → {remote_version}. Updating...{RESET}")
