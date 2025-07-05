@@ -2,10 +2,8 @@ import sys
 import os
 import shutil
 import subprocess
-from modules.colors.ansi import ansi_supported, ansi_codes
+from modules.colors.ansi_codes import RESET, RED, GREEN, BLUE, YELLOW, WHITE, PURPLE, CYAN, LIGHT_CYAN, SUPER_LIGHT_CYAN, ORANGE, ansi_is_supported
 import modules.versioning_tools as versioning_tools
-
-RESET, RED, GREEN, BLUE, YELLOW, WHITE, PURPLE, CYAN, LIGHT_CYAN, SUPER_LIGHT_CYAN, ORANGE = ansi_codes() if ansi_supported() else ("",) * 11
 
 BACKUP_FOLDER_PREFIX = "version-"
 

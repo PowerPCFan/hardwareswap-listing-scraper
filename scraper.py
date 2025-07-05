@@ -77,44 +77,6 @@ def get_karma_string(author):
 
     return j, pk, ck
 
-def send_notification(text, shorturl):
-    headers={
-        "X-Click": shorturl, # notification click action
-        "X-Title": f"New listing on r/hardwareswap",
-        "X-Priority": "3", # 1 = min, 2 = low, 3 = default, 4 = high, 5 = max
-        "X-Markdown": "yes"
-    }
-
-    data = f"{text}\n\nListing URL: [{shorturl}]({shorturl})"
-    data = data.encode(encoding='utf-8')
-
-    try:
-        requests.post(
-            "https://ntfy.sh/" + config.topic_name,
-            data=data,
-            headers=headers
-        )
-    # just some generic error handling for common requests errors:
-    except requests.exceptions.ConnectionError as e:
-        print(f"{RED}A network error while sending notification: {e}{RESET}")
-    except requests.exceptions.Timeout:
-        print(f"{RED}Request timed out while trying to send notification.{RESET}")
-    except requests.exceptions.HTTPError as e:
-        print(f"{RED}An HTTP error occurred while sending notification: {e}{RESET}")
-    except requests.exceptions.RequestException as e:
-        print(f"{RED}An unexpected error occurred while sending notification: {e}{RESET}")
-    except Exception as e:
-        print(f"{RED}An unexpected error occurred while sending notification: {e}{RESET}")
-
-def send_sms(shorturl):
-    gmail = Gmail(config.gmail_address, config.app_password)
-
-    recipient = f"{config.phone_number}@{config.sms_gateway}"
-    subject = "" # no subject
-    body = f"New listing on r/hardwareswap: {shorturl}"
-
-    gmail.send_email(recipient, subject, body)
-
 def print_new_post(subreddit, author, h, w, url, utc_date, flair, title):
     j, pk, ck = get_karma_string(author) # use the full `author` var because the function needs more than just the name
     trades = get_trades_number(flair)
@@ -141,10 +103,10 @@ def print_new_post(subreddit, author, h, w, url, utc_date, flair, title):
     print(f"Posted {WHITE}{date_posted}{RESET}")
     
     if config.push_notifications:
-        send_notification(title, url)
+        ntfy.send_notification(title, url)
 
     if config.sms:
-        send_sms(url)
+        sms.send_sms(url)
         
     if config.webhook:
         webhook.send_webhook(
@@ -252,11 +214,6 @@ if __name__ == "__main__":
         depchecker.check_dependencies()
         
         import modules.versioning_tools as versioning_tools
-        from modules.colors.ansi import ansi_supported, ansi_codes
-
-        ansi_is_supported = ansi_supported()
-        if ansi_is_supported:
-            RESET, RED, GREEN, BLUE, YELLOW, WHITE, PURPLE, CYAN, LIGHT_CYAN, SUPER_LIGHT_CYAN, ORANGE = ansi_codes()
 
         remote_version = versioning_tools.get_remote_version()
         local_version = versioning_tools.get_local_version()
@@ -265,19 +222,19 @@ if __name__ == "__main__":
         import modules.updater as updater
         import modules.splash as splash
         import modules.ai as ai
-        import modules.config_tools as conftools
+        import modules.config.config_tools as conftools
+        from modules.notifications import ntfy, sms
+        from modules.colors.ansi_codes import RESET, RED, GREEN, BLUE, YELLOW, WHITE, PURPLE, CYAN, LIGHT_CYAN, SUPER_LIGHT_CYAN, ORANGE, ansi_is_supported
         import modules.discord.webhook as webhook
         from modules.url_shorteners import TinyURL, SLExpectOVH, SLPowerPCFanXYZ
-        from modules.gmail import Gmail
 
         # Third-party imports
         import praw
-        import requests
 
         conftools.convert_py_to_json()
         conftools.ensure_all_values_are_present()
 
-        config = conftools.Config.load()
+        from modules.config.configuration import config
 
         main()
     except KeyboardInterrupt:
