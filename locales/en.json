@@ -1,4 +1,4 @@
 {
-    "user_intro": "Hello, {user}",
-    "description": "You can manage your account settings here"
-}
+    "mode_is_invalid": "{mode} is not a valid mode. Please ensure that your config.json file is properly set up.",
+    "unexpected_error": "ERROR: An unexpected error occurred: "
+} 

@@ -11,6 +11,7 @@ import sys
 
 # local imports
 import modules.welcome as welcome
+import locales.keys as t
 import modules.reddit as reddit
 import modules.modes as modes
 import modules.checks.variable_checker as variable_checker
@@ -36,7 +37,7 @@ def main():
         case "match_llm":
             modes.match_llm(subreddit)
         case _:
-            raise Exception(f"{config.mode} is not a valid mode. Please ensure that your config.json file is properly set up.")
+            raise Exception(t.mode_is_invalid(mode=config.mode))
 
 if __name__ == "__main__":
     try:
@@ -45,5 +46,5 @@ if __name__ == "__main__":
         print(f"{YELLOW}\nExiting...{RESET}")
         sys.exit(0)
     except Exception as e:
-        print(f"{'-' * 36}\n{RED}ERROR: An unexpected error occurred:{RESET}\n{'-' * 36}\n{e}")
+        print(f"{'-' * 36}\n{RED}{t.unexpected_error()}{RESET}\n{'-' * 36}\n{e}")
         sys.exit(1)
