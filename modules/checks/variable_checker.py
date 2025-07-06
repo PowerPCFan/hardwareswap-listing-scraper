@@ -4,6 +4,9 @@ from modules.colors.ansi_codes import RESET, RED, GREEN, BLUE, YELLOW, WHITE, PU
 
 def check():
     print(f"{BLUE}Initializing variables...{RESET}")
+
+    allowed_modes = ["firehose", "match", "match_llm"]
+    allowed_locales = ["en"]
     
     try:
         if not config.reddit_id or not config.reddit_secret or not config.reddit_username:
@@ -16,8 +19,10 @@ def check():
             raise ValueError("You have SMS notifications enabled but have not specified all of the required values.\nPlease ensure your config.json has all the proper values filled in.")
         if sum(bool(x) for x in [config.tinyurl, config.sl_expect_ovh, config.sl_powerpcfan_xyz]) > 1:
             raise ValueError("You cannot have more than one URL shortener enabled at once.\nPlease choose one and disable the others in your config.json file.")
-        if config.mode not in ["firehose", "match", "match_llm"]:
-            raise ValueError(f"Invalid mode specified in config.json. Allowed values are: 'firehose', 'match', 'match_llm'.")
+        if config.mode not in allowed_modes:
+            raise ValueError(f"Invalid mode specified in config.json. Allowed values are: {', '.join(allowed_modes)}.")
+        if config.locale not in allowed_locales:
+            raise ValueError(f"Invalid locale specified in config.json. Allowed values are: {', '.join(allowed_locales)}.")
         
         print("")
     except ValueError as e:

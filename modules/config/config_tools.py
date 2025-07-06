@@ -73,7 +73,8 @@ def ensure_all_values_are_present():
         "phone_number": "",
         "webhook": False,
         "webhook_url": "",
-        "webhook_ping": ""
+        "webhook_ping": "",
+        "locale": "en"
     }
     
     deprecated_keys = [
@@ -140,6 +141,8 @@ class Config:
     webhook: bool
     webhook_url: str
     webhook_ping: str
+    
+    locale: str
 
     # function to load the vars from config.json
     @staticmethod

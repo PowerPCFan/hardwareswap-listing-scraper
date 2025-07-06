@@ -26,5 +26,6 @@
     "phone_number": "",
     "webhook": false,
     "webhook_url": "",
-    "webhook_ping": ""
+    "webhook_ping": "",
+    "locale": "en"
 }
