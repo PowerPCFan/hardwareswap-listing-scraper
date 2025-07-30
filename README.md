@@ -192,7 +192,7 @@ That's all! Whenever a new post is printed to your terminal, it'll send you an S
 In the PowerShell terminal you left open from earlier, run these commands:
    1. Create a virtual environment for packages: `py -m venv venv` ***(You only need to do this once!)***
    2. Activate the venv (virtual environment): `venv\Scripts\Activate.ps1`
-   3. Install required packages: `pip install -r requirements.txt`
+   3. Install required packages: `pip install -r requirements.txt` ***(You only need to do this once!)***
    4. And finally to start the actual script: `py scraper.py`.
 
 ### Linux and Mac
