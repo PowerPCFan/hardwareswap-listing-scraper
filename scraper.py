@@ -3,8 +3,8 @@
 # Check if third party modules are installed and if not, install them
 import modules.checks.dependency_checker as depchecker
 
-# dont ask why there are two `if __name__ == "__main__"` statements lol
-if __name__ == "__main__": depchecker.check_dependencies()
+if __name__ == "__main__":
+    depchecker.check_dependencies()
 
 # stdlib imports
 import sys
