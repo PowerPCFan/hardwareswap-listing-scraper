@@ -2,7 +2,7 @@ import importlib.util
 import json
 import os
 from typing import List
-from modules.colors.ansi_codes import RESET, RED, GREEN, BLUE, YELLOW, WHITE, PURPLE, CYAN, LIGHT_CYAN, SUPER_LIGHT_CYAN, ORANGE, ansi_is_supported
+from modules.colors.ansi_codes import RESET, RED, GREEN, YELLOW
 from dataclasses import dataclass
 
 CONFIG_PY = "config.py"
@@ -15,7 +15,7 @@ def convert_py_to_json(config_py=CONFIG_PY, output_json=CONFIG_JSON):
     if config_py_exists():
         try:
             print(f"{YELLOW}Config.py file detected! This script now uses config.json. Attempting to migrate config.py -> config.json...{RESET}")
-            
+
             # load config.py (chatgpt generated lol)
             spec = importlib.util.spec_from_file_location("config", config_py)
             if spec is None:
@@ -36,10 +36,10 @@ def convert_py_to_json(config_py=CONFIG_PY, output_json=CONFIG_JSON):
             # make config.json file
             with open(output_json, "w") as f:
                 json.dump(config_dict, f, indent=4)
-                
+
             # remove config.py file
             os.remove(CONFIG_PY)
-            
+
             print(f"{GREEN}Successfully migrated config.py to config.json!{RESET}")
         except Exception as e:
             print(f"{RED}Error converting config.py to config.json: {e}{RESET}")
@@ -75,13 +75,13 @@ def ensure_all_values_are_present():
         "webhook_url": "",
         "webhook_ping": ""
     }
-    
+
     deprecated_keys = [
         "firehose",
         "match",
         "match_llm"
     ]
-        
+
     # load config.json
     with open(CONFIG_JSON, 'r') as f:
         config: dict = json.load(f)
@@ -94,7 +94,7 @@ def ensure_all_values_are_present():
             print(f"{RED}Key '{key}' was not found in your config.json file. Adding...{RESET}")
             config[key] = default_value
             updated = True
-    
+
     # remove keys that were once used but are no longer needed
     for key in deprecated_keys:
         if key in config:

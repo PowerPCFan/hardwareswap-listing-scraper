@@ -1,10 +1,9 @@
 import requests
 from modules.systemd import Logger
-from typing import Optional
 from modules.colors.hex_colors import HTMLColor
 
 def create_embed(color: str, url: str, author: str, trades: str, have: str, want: str, joined: str, post_karma: str, comment_karma: str, date_posted: str) -> dict:
-    embed_color: Optional[int] = HTMLColor(color)
+    embed_color: int | None = HTMLColor(color)
 
     return {
         "title": f"A new listing by u/{author} has been posted on r/HardwareSwap!",
@@ -48,7 +47,7 @@ def create_embed(color: str, url: str, author: str, trades: str, have: str, want
         },
     }
 
-def send_webhook(webhook_url: str, content: Optional[str], embed: Optional[dict], username: Optional[str]):
+def send_webhook(webhook_url: str, content: str | None, embed: dict | None, username: str | None):
     logger = Logger()
     
     # Prepare the JSON payload

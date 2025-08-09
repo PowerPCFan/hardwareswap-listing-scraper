@@ -2,7 +2,7 @@ from modules.notifications.gmail import Gmail
 from modules.config.configuration import config
 
 
-def send_sms(shorturl):
+def send_sms(shorturl: str):
     gmail = Gmail(config.gmail_address, config.app_password)
 
     recipient = f"{config.phone_number}@{config.sms_gateway}"

@@ -1,11 +1,11 @@
 import re as regexp
 import modules.notifications.discord as discord
+import modules.reddit as reddit
 from modules.config.configuration import config
-
 from modules.notifications import ntfy, sms
 from modules.url_shorteners import TinyURL, SLExpectOVH, SLPowerPCFanXYZ
 from modules.timestamp_generators import reddit_timestamp_creator, reddit_account_age_timestamp_generator
-from modules.colors.ansi_codes import RESET, RED, GREEN, BLUE, YELLOW, WHITE, PURPLE, CYAN, LIGHT_CYAN, SUPER_LIGHT_CYAN, ORANGE, ansi_is_supported
+from modules.colors.ansi_codes import RESET, RED, GREEN, BLUE, YELLOW, WHITE, PURPLE, CYAN, SUPER_LIGHT_CYAN, ORANGE
 
 def get_trades_number(flair: str) -> str:
     if isinstance(flair, str) and flair and flair.startswith("Trades: "):
@@ -17,25 +17,25 @@ def get_trades_number(flair: str) -> str:
 
     return "0" if trades == "none" else trades
 
-def get_karma_string(author):
+def get_karma_string(author: reddit.Redditor) -> tuple[str, str, str]:
     j = reddit_account_age_timestamp_generator(author.created_utc)
     pk = author.link_karma
     ck = author.comment_karma
 
     return j, pk, ck
 
-def parse_have_want(title):
+def parse_have_want(title: str) -> tuple[str, str]:
     h_match = regexp.search(r'\[H\](.*?)\[W\]', title, regexp.IGNORECASE)
     w_match = regexp.search(r'\[W\](.*)', title, regexp.IGNORECASE)
 
     h = h_match.group(1).strip() if h_match else ""
     w = w_match.group(1).strip() if w_match else ""
     return h, w
-    
-def print_new_post(subreddit, author, h, w, url, utc_date, flair, title):
-    j, pk, ck = get_karma_string(author) # use the full `author` var because the function needs more than just the name
+
+def print_new_post(subreddit: reddit.Subreddit, author: reddit.Redditor, h: str, w: str, url: str, utc_date: float, flair: str, title: str):
+    j, pk, ck = get_karma_string(author) # use the full `author` var because the function needs the entire author object
     trades = get_trades_number(flair)
-    
+
     date_posted = reddit_timestamp_creator(utc_date)
 
     if config.tinyurl:
@@ -49,8 +49,8 @@ def print_new_post(subreddit, author, h, w, url, utc_date, flair, title):
         url = ppc.shorten(url, timeout=8)
     else:
         url = url
-    
-    print("\n") # newline for spacing 
+
+    print("\n") # newline for spacing
     print(f"New post by {BLUE}u/{author.name}{RESET} ({YELLOW}{trades}{RESET} {'trades' if trades != 1 else 'trade'} | joined {CYAN}{j}{RESET} | post karma {ORANGE}{pk}{RESET} | comment karma {PURPLE}{ck}{RESET}):")
     print(f"[H]: {GREEN}{h}{RESET}")
     print(f"[W]: {RED}{w}{RESET}")
@@ -62,7 +62,7 @@ def print_new_post(subreddit, author, h, w, url, utc_date, flair, title):
 
     if config.sms:
         sms.send_sms(url)
-        
+
     if config.webhook:
         discord.send_webhook(
             webhook_url = config.webhook_url,
@@ -81,7 +81,3 @@ def print_new_post(subreddit, author, h, w, url, utc_date, flair, title):
                 date_posted = date_posted
             )
         )
-
-    # Sleep for a half second to make sure the script doesn't break
-    # commented out because it's not really necessary here
-    # time.sleep(0.5)

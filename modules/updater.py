@@ -2,17 +2,18 @@ import sys
 import os
 import shutil
 import subprocess
+from modules.versioning_tools import Version
 from modules.colors.ansi_codes import RESET, RED, GREEN, BLUE, YELLOW, WHITE, PURPLE, CYAN, LIGHT_CYAN, SUPER_LIGHT_CYAN, ORANGE, ansi_is_supported
 from modules.config.configuration import local_version, remote_version
 
 BACKUP_FOLDER_PREFIX = "version-"
 
-def ensure_remote():
+def ensure_remote() -> None:
     remotes = subprocess.check_output(["git", "remote"]).decode().split()
     if "origin" not in remotes:
         subprocess.run(["git", "remote", "add", "origin", "https://github.com/PowerPCFan/hardwareswap-listing-scraper.git"], check=True)
 
-def create_backup(local_version):
+def create_backup(local_version: Version) -> None:
     backup_folder = f"{BACKUP_FOLDER_PREFIX}{local_version}-backup"
     os.makedirs(backup_folder, exist_ok=True)
 
@@ -27,7 +28,7 @@ def create_backup(local_version):
             
     print(f"{GREEN}Backup created at {backup_folder}{RESET}")
 
-def update_repo():
+def update_repo() -> None:
     ensure_remote() # ensures that the remote is set up correctly to my github repo
 
     # git fetch origin
@@ -38,7 +39,7 @@ def update_repo():
     print(f"{GREEN}Update Successful!{RESET}\nPlease restart HardwareSwap Listing Scraper.")
     sys.exit(0)
 
-def check_for_updates():
+def check_for_updates() -> None:
     print(f"\n{BLUE}Checking for updates...{RESET}")
     
     try:

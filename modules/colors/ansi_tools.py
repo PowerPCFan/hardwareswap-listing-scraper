@@ -3,6 +3,7 @@ import sys
 import ctypes
 import functools
 
+
 def ansi_codes():
     ANSI = "\033["
     RESET = f"{ANSI}0m"
@@ -16,12 +17,12 @@ def ansi_codes():
     LIGHT_CYAN = f"{ANSI}96m"
     SUPER_LIGHT_CYAN = f"{ANSI}38;5;153m"
     ORANGE = f"{ANSI}38;5;208m"
-    
+
     return RESET, RED, GREEN, BLUE, YELLOW, WHITE, PURPLE, CYAN, LIGHT_CYAN, SUPER_LIGHT_CYAN, ORANGE
 
 # Thanks to ChatGPT for this, I modified it but the core logic is from chatgpt
 
-def enable_ansi_windows():
+def enable_ansi_windows() -> bool:
     try:
         kernel32 = ctypes.windll.kernel32
         handle = kernel32.GetStdHandle(-11)
@@ -33,10 +34,10 @@ def enable_ansi_windows():
     except Exception:
         return False
 
-def supports_ansi(vt_enabled):
+def supports_ansi(vt_enabled: bool) -> bool:
     if os.name != 'nt':
         return sys.stdout.isatty()
-    
+
     if vt_enabled:
         return True
 
@@ -50,12 +51,9 @@ def supports_ansi(vt_enabled):
     )
 
 @functools.lru_cache(maxsize=None)
-def ansi_supported():
+def ansi_supported() -> bool:
     vt_enabled = False
     if os.name == 'nt':
         vt_enabled = enable_ansi_windows()
-    
-    if supports_ansi(vt_enabled):
-        return True
-    else:
-        return False
+
+    return supports_ansi(vt_enabled)

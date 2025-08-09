@@ -8,7 +8,7 @@ packages = [
     "openai",
     "packaging"
 ]
-        
+
 def check_dependencies():
     logger = Logger()
 

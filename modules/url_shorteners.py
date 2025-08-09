@@ -1,11 +1,12 @@
 import requests
 from modules.colors.ansi_codes import RESET, RED, GREEN, BLUE, YELLOW, WHITE, PURPLE, CYAN, LIGHT_CYAN, SUPER_LIGHT_CYAN, ORANGE, ansi_is_supported
 
+
 class TinyURL:
-    def __init__(self):
+    def __init__(self) -> None:
         pass
     
-    def shorten(self, url, timeout) -> str:
+    def shorten(self, url: str, timeout: float | int) -> str:
         try:
             api_url = f"http://tinyurl.com/api-create.php?url={url}"
             response = requests.get(api_url, timeout=timeout)
@@ -16,9 +17,10 @@ class TinyURL:
         except Exception as e:
             print(f"{RED}ERROR: {e}{RESET}")
             return url
-        
+
+
 class SLExpectOVH:
-    def __init__(self):
+    def __init__(self) -> None:
         self.api = "https://sl.expect.ovh/api/shorten"
         # These headers are probably not necessary but I just included them because yes
         self.headers = {
@@ -33,7 +35,7 @@ class SLExpectOVH:
             "Referrer-Policy": "strict-origin-when-cross-origin"
         }
 
-    def shorten(self, url, timeout):
+    def shorten(self, url: str, timeout: float | int) -> str:
         try:
             response = requests.post(self.api, json={"url": url}, headers=self.headers, timeout=timeout)
             if response.status_code == 200:
@@ -50,7 +52,7 @@ class SLExpectOVH:
             return url
 
 class SLPowerPCFanXYZ:
-    def __init__(self):
+    def __init__(self) -> None:
         self.api = "https://sl.powerpcfan.xyz/api/shorten"
         # These headers are probably not necessary but I just included them because yes
         self.headers = {
@@ -63,8 +65,8 @@ class SLPowerPCFanXYZ:
             "sec-fetch-site": "same-origin",
             "referer": "https://sl.powerpcfan.xyz/"
         }
-        
-    def shorten(self, url, timeout):
+
+    def shorten(self, url: str, timeout: float | int) -> str:
         try:
             response = requests.post(self.api, json={"url": url}, headers=self.headers, timeout=timeout)
             if response.status_code == 200:

@@ -1,9 +1,9 @@
 import requests
-from modules.colors.ansi_codes import RESET, RED, GREEN, BLUE, YELLOW, WHITE, PURPLE, CYAN, LIGHT_CYAN, SUPER_LIGHT_CYAN, ORANGE, ansi_is_supported
+from modules.colors.ansi_codes import RESET, RED
 from modules.config.configuration import config
 
 
-def send_notification(text, shorturl):
+def send_notification(text: str, shorturl: str):
     headers={
         "X-Click": shorturl, # notification click action
         "X-Title": f"New listing on r/hardwareswap",

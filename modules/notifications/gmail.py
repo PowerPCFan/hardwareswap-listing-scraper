@@ -1,7 +1,6 @@
 import smtplib
 import ssl
 from email.message import EmailMessage
-from typing import Optional
 
 SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 465
@@ -11,7 +10,7 @@ class Gmail:
         self.email = email
         self.password = password
 
-    def send_email(self, recipient: str, subject: str, body: str, html: Optional[str] = None):
+    def send_email(self, recipient: str, subject: str, body: str, html: str | None = None):
         """
         :param recipient: Recipient's email address.
         :param subject: Email subject line.
@@ -25,7 +24,7 @@ class Gmail:
             server.login(self.email, self.password)
             server.send_message(msg)
 
-    def _build_message(self, to: str, subject: str, body: str, html: Optional[str] = None) -> EmailMessage:
+    def _build_message(self, to: str, subject: str, body: str, html: str | None = None) -> EmailMessage:
         msg = EmailMessage()
         msg["From"] = self.email
         msg["To"] = to

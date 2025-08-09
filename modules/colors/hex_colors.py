@@ -1,5 +1,4 @@
 from enum import Enum
-from typing import Optional
 
 class HTMLColorName(Enum):
     BLACK = "000000"
@@ -144,7 +143,7 @@ class HTMLColorName(Enum):
     WHITESMOKE = "F5F5F5"
     YELLOWGREEN = "9ACD32"
 
-def HTMLColor(color_name: str) -> Optional[int]:
+def HTMLColor(color_name: str) -> int | None:
     try:
         normalized_name = color_name.strip().upper().replace(' ', '')
         return int(HTMLColorName[normalized_name].value, 16)
