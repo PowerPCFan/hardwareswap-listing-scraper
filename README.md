@@ -2,6 +2,8 @@
 
 This README isn't anything amazing but everything you need should be here.
 
+### Visit https://www.powerpcfan.xyz/project-showcases/hardwareswap-listing-scraper for an overview of this script's features.
+
 # Getting up and running with the script
 ## Prerequisites
 Make sure you have the following installed before proceeding:
