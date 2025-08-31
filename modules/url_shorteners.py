@@ -75,7 +75,7 @@ class SLPowerPCFanXYZ:
                 if short == url:
                     return url
                 else:
-                    return f"https://sl.powerpcfan.xyz{short}"
+                    return short
             else:
                 raise Exception("Error shortening URL.")
         except Exception as e:
