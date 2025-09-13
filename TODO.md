@@ -1,0 +1,2 @@
+- Remove Match LLM mode
+- Add "Remove possible scam listings" setting
