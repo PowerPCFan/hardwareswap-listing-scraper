@@ -158,7 +158,7 @@ To set up the script so a user or role gets pinged on Discord for every new HWS 
    - If you copied the ID of a user, insert `<@userid>` between the quotes after `"webhook_ping"`, with `userid` being the User ID that you copied in step #5.
      - For example it might look like this: `"webhook_ping": "<@123456789>"`
 
-That's all! Whenever a new post is printed to your terminal, it'll send a message to the webhook and ping the desired user/role as well! This has only been tested on Discord but you might be able to get it to work with other platforms like Slack since it's just a webhook.
+That's all! Whenever a new post is printed to your terminal, it'll send a message to the webhook and ping the desired user/role as well!
 
 ### Receive Push Notifications for posts (Optional) (Recommended!)
 To set up the script so you get push notifications for every new HWS post (firehose mode) or every new HWS post that matches your criteria (match mode), follow these steps:
