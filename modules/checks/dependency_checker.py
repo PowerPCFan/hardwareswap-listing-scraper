@@ -9,6 +9,7 @@ packages = [
     "packaging"
 ]
 
+
 def check_dependencies():
     logger = Logger()
 
@@ -24,7 +25,10 @@ def check_dependencies():
                     version = parts[1] if len(parts) > 1 else None
                     dependencies[name] = version
     except FileNotFoundError:
-        logger.failed("requirements.txt not found. Please ensure it exists in the current directory.")
+        logger.failed(
+            "requirements.txt not found. "
+            "Please ensure it exists in the current directory."
+        )
         return
     except Exception as e:
         logger.failed(f"Error reading requirements.txt: {e}")
@@ -39,10 +43,23 @@ def check_dependencies():
             logger.failed(f"{dep} is not installed. Installing...")
             install_str = f"{dep}=={version}" if version else dep
             try:
-                subprocess.check_call([sys.executable, "-m", "pip", "install", install_str])
+                subprocess.check_call([
+                    sys.executable,
+                    "-m",
+                    "pip",
+                    "install",
+                    install_str
+                ])
             except Exception as e:
-                logger.failed(f"Failed to install {dep} version {version}. Error message: {e}\nPlease install it manually using the command: pip install {install_str}")
+                logger.failed(
+                    f"Failed to install {dep} version {version}. "
+                    f"Error message: {e}\n"
+                    f"Please install it manually using the command: "
+                    f"pip install {install_str}"
+                )
                 continue
         except Exception as e:
-            logger.failed(f"An error occurred while checking if {dep} is installed: {e}")
+            logger.failed(
+                f"An error occurred while checking if {dep} is installed: {e}"
+            )
             continue

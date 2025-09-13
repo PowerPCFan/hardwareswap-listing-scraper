@@ -16,8 +16,9 @@ import modules.modes as modes
 import modules.checks.variable_checker as variable_checker
 import modules.updater as updater
 import modules.config.config_tools as conftools
-from modules.colors.ansi_codes import RESET, RED, GREEN, BLUE, YELLOW, WHITE, PURPLE, CYAN, LIGHT_CYAN, SUPER_LIGHT_CYAN, ORANGE, ansi_is_supported
+from modules.colors.ansi_codes import RESET, RED, YELLOW
 from modules.config.configuration import config
+
 
 def main() -> None:
     conftools.convert_py_to_json()
@@ -36,7 +37,11 @@ def main() -> None:
         case "match_llm":
             modes.match_llm(subreddit)
         case _:
-            raise Exception(f"{config.mode} is not a valid mode. Please ensure that your config.json file is properly set up.")
+            raise Exception(
+                f"{config.mode} is not a valid mode. "
+                "Please ensure that your config.json file is properly set up."
+            )
+
 
 if __name__ == "__main__":
     try:

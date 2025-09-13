@@ -2,7 +2,12 @@ import requests
 from modules.systemd import Logger
 from modules.colors.hex_colors import HTMLColor
 
-def create_embed(color: str, url: str, author: str, trades: str, have: str, want: str, joined: str, post_karma: str, comment_karma: str, date_posted: str) -> dict:
+
+def create_embed(
+    color: str, url: str, author: str, trades: str, have: str, want: str,
+    joined: str, post_karma: str, comment_karma: str, date_posted: str
+) -> dict:
+
     embed_color: int | None = HTMLColor(color)
 
     return {
@@ -43,20 +48,21 @@ def create_embed(color: str, url: str, author: str, trades: str, have: str, want
             }
         ],
         "thumbnail": {
-            "url": "https://raw.githubusercontent.com/PowerPCFan/hardwareswap-listing-scraper/refs/heads/main/assets/3.png"
+            "url": "https://raw.githubusercontent.com/PowerPCFan/hardwareswap-listing-scraper/refs/heads/main/assets/3.png"  # noqa: E501
         },
     }
 
+
 def send_webhook(webhook_url: str, content: str | None, embed: dict | None, username: str | None):
     logger = Logger()
-    
+
     # Prepare the JSON payload
     json_data = {
-        "content": content if content != None else "",
-        "embeds": [embed] if embed != None else [],
-        "username": username if username != None else ""
+        "content": content if content is not None else "",
+        "embeds": [embed] if embed is not None else [],
+        "username": username if username is not None else ""
     }
-    
+
     # Send the webhook
     try:
         response = requests.post(webhook_url, json=json_data)

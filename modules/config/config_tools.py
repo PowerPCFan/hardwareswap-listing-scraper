@@ -8,15 +8,19 @@ from dataclasses import dataclass
 CONFIG_PY = "config.py"
 CONFIG_JSON = "config.json"
 
+
 def config_py_exists():
     return os.path.exists(CONFIG_PY)
+
 
 def convert_py_to_json(config_py=CONFIG_PY, output_json=CONFIG_JSON):
     if config_py_exists():
         try:
-            print(f"{YELLOW}Config.py file detected! This script now uses config.json. Attempting to migrate config.py -> config.json...{RESET}")
+            print(
+                f"{YELLOW}Config.py file detected! This script now uses config.json. "
+                f"Attempting to migrate config.py -> config.json...{RESET}"
+            )
 
-            # load config.py (chatgpt generated lol)
             spec = importlib.util.spec_from_file_location("config", config_py)
             if spec is None:
                 raise ImportError(f"{RED}Error: Failed to load spec from {config_py}{RESET}")
@@ -43,6 +47,7 @@ def convert_py_to_json(config_py=CONFIG_PY, output_json=CONFIG_JSON):
             print(f"{GREEN}Successfully migrated config.py to config.json!{RESET}")
         except Exception as e:
             print(f"{RED}Error converting config.py to config.json: {e}{RESET}")
+
 
 def ensure_all_values_are_present():
     default_config = {
@@ -106,6 +111,7 @@ def ensure_all_values_are_present():
         with open(CONFIG_JSON, 'w') as f:
             json.dump(config, f, indent=4)
 
+
 @dataclass
 class Config:
     # type stuff
@@ -117,17 +123,17 @@ class Config:
 
     author_has: List[str]
     author_wants: List[str]
-    
+
     openrouter_api_key: str
     author_has_llm_query: str
     author_wants_llm_query: str
 
     retrieve_older_posts: bool
-    
+
     tinyurl: bool
     sl_expect_ovh: bool
     sl_powerpcfan_xyz: bool
-    
+
     push_notifications: bool
     topic_name: str
 
@@ -136,7 +142,7 @@ class Config:
     app_password: str
     sms_gateway: str
     phone_number: str
-    
+
     webhook: bool
     webhook_url: str
     webhook_ping: str

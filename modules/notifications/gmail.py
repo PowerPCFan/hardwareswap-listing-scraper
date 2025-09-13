@@ -5,6 +5,7 @@ from email.message import EmailMessage
 SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 465
 
+
 class Gmail:
     def __init__(self, email: str, password: str):
         self.email = email

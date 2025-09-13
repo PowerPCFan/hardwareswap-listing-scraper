@@ -1,7 +1,8 @@
 import praw
-from praw.models import Subreddit, Submission, Redditor
+from praw.models import Subreddit, Submission, Redditor  # noqa: F401
 from modules.config.configuration import config
-from modules.colors.ansi_codes import RESET, RED, GREEN, BLUE, YELLOW, WHITE, PURPLE, CYAN, LIGHT_CYAN, SUPER_LIGHT_CYAN, ORANGE, ansi_is_supported
+from modules.colors.ansi_codes import RESET, GREEN, BLUE
+
 
 def initialize() -> Subreddit:
     print(f"{BLUE}Connecting to Reddit...{RESET}")

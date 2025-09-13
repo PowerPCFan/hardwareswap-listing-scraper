@@ -4,10 +4,10 @@ from modules.config.configuration import config
 
 
 def send_notification(text: str, shorturl: str):
-    headers={
-        "X-Click": shorturl, # notification click action
-        "X-Title": f"New listing on r/hardwareswap",
-        "X-Priority": "3", # 1 = min, 2 = low, 3 = default, 4 = high, 5 = max
+    headers = {
+        "X-Click": shorturl,  # notification click action
+        "X-Title": "New listing on r/hardwareswap",
+        "X-Priority": "3",  # 1 = min, 2 = low, 3 = default, 4 = high, 5 = max
         "X-Markdown": "yes"
     }
 

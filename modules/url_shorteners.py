@@ -1,11 +1,11 @@
 import requests
-from modules.colors.ansi_codes import RESET, RED, GREEN, BLUE, YELLOW, WHITE, PURPLE, CYAN, LIGHT_CYAN, SUPER_LIGHT_CYAN, ORANGE, ansi_is_supported
+from modules.colors.ansi_codes import RESET, RED
 
 
 class TinyURL:
     def __init__(self) -> None:
         pass
-    
+
     def shorten(self, url: str, timeout: float | int) -> str:
         try:
             api_url = f"http://tinyurl.com/api-create.php?url={url}"
@@ -50,6 +50,7 @@ class SLExpectOVH:
         except Exception as e:
             print(f"{RED}ERROR: {e}{RESET}")
             return url
+
 
 class SLPowerPCFanXYZ:
     def __init__(self) -> None:

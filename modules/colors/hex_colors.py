@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class HTMLColorName(Enum):
     BLACK = "000000"
     SILVER = "C0C0C0"
@@ -17,7 +18,7 @@ class HTMLColorName(Enum):
     BLUE = "0000FF"
     TEAL = "008080"
     AQUA = "00FFFF"
-    
+
     ALICEBLUE = "F0F8FF"
     ANTIQUEWHITE = "FAEBD7"
     AQUAMARINE = "7FFFD4"
@@ -142,6 +143,7 @@ class HTMLColorName(Enum):
     WHEAT = "F5DEB3"
     WHITESMOKE = "F5F5F5"
     YELLOWGREEN = "9ACD32"
+
 
 def HTMLColor(color_name: str) -> int | None:
     try:

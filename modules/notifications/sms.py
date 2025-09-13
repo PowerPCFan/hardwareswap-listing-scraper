@@ -6,7 +6,7 @@ def send_sms(shorturl: str):
     gmail = Gmail(config.gmail_address, config.app_password)
 
     recipient = f"{config.phone_number}@{config.sms_gateway}"
-    subject = "" # no subject
+    subject = ""  # no subject
     body = f"New listing on r/hardwareswap: {shorturl}"
 
     gmail.send_email(recipient, subject, body)

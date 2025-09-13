@@ -1,6 +1,7 @@
 import time
 from datetime import datetime
 
+
 def reddit_timestamp_creator(unix_epoch: float) -> str:
     # Convert to local datetime object
     dt = datetime.fromtimestamp(unix_epoch)
@@ -16,6 +17,7 @@ def reddit_timestamp_creator(unix_epoch: float) -> str:
     hour_12 = hour % 12 or 12
 
     return f"{month}/{day}/{year} at {hour_12}:{minute:02d} {am_pm}"
+
 
 def reddit_account_age_timestamp_generator(unix_epoch) -> str:
     return time.strftime("%B %d, %Y", time.localtime(unix_epoch))

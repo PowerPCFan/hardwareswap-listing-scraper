@@ -20,6 +20,7 @@ def ansi_codes():
 
     return RESET, RED, GREEN, BLUE, YELLOW, WHITE, PURPLE, CYAN, LIGHT_CYAN, SUPER_LIGHT_CYAN, ORANGE
 
+
 # Thanks to ChatGPT for this, I modified it but the core logic is from chatgpt
 
 def enable_ansi_windows() -> bool:
@@ -33,6 +34,7 @@ def enable_ansi_windows() -> bool:
         return kernel32.SetConsoleMode(handle, new_mode) != 0
     except Exception:
         return False
+
 
 def supports_ansi(vt_enabled: bool) -> bool:
     if os.name != 'nt':
@@ -49,6 +51,7 @@ def supports_ansi(vt_enabled: bool) -> bool:
             'TERM' in os.environ and 'xterm' in os.environ['TERM']
         )
     )
+
 
 @functools.lru_cache(maxsize=None)
 def ansi_supported() -> bool:
