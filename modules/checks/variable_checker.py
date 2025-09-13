@@ -13,10 +13,23 @@ def check():
                 "Please ensure all values are filled in using the instructions found in the README."
             )
 
-        if config.mode == "match" and not (config.author_has or not config.author_wants):
+        if config.mode == "match" and (not config.author_has or not config.author_wants):
             raise ValueError(
                 "You have match mode enabled, but have not specified any values for the author_has or author_wants "
                 "keys.\nPlease switch to firehose mode to view all posts, or insert values in your config.json."
+            )
+
+        if config.mode == "match_llm" and (
+            not config.openrouter_api_key or
+            not config.author_has_llm_query or
+            not config.author_wants_llm_query
+        ):
+            raise ValueError(
+                "You have match_llm mode enabled, but one or more required values are missing:\n"
+                "  - openrouter_api_key\n"
+                "  - author_has_llm_query\n"
+                "  - author_wants_llm_query\n"
+                "Please fill in all values in your config.json."
             )
 
         if config.push_notifications and not config.topic_name:
