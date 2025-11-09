@@ -154,6 +154,9 @@ class Config:
     def load(json_path="config.json") -> "Config":
         if not os.path.exists(json_path):
             raise FileNotFoundError(f"{RED}Error: {json_path} not found.{RESET}")
+
+        ensure_all_values_are_present()
+
         with open(json_path) as f:
             data = json.load(f)
         return Config(**data)

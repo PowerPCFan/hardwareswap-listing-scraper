@@ -22,7 +22,6 @@ from modules.config.configuration import config
 
 def main() -> None:
     conftools.convert_py_to_json()
-    conftools.ensure_all_values_are_present()
 
     updater.check_for_updates()
     variable_checker.check()
