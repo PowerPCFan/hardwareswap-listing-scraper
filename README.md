@@ -141,8 +141,8 @@ and the LLM will understand what you are looking for.
   - If set to `true`, the URLs used in notifications, SMS messages, and console output will be sl.expect.ovh links made with the [https://sl.expect.ovh](https://sl.expect.ovh) URL shortener.
   - If set to `false` (default), the script will use reddit.com URLs.
 
-- **sl_powerpcfan_xyz (Beta)**
-  - If set to `true`, the URLs used in notifications, SMS messages, and console output will be sl.powerpcfan.xyz links made with my URL shortener [https://sl.powerpcfan.xyz](https://sl.powerpcfan.xyz).
+- **blinklink (Beta)**
+  - If set to `true`, the URLs used in notifications, SMS messages, and console output will be BlinkLink links made with my URL shortener [https://blinkl.ink](https://blinkl.ink).
   - If set to `false` (default), the script will use reddit.com URLs.
 
 ### Receive Discord Pings for Posts with a Webhook (Optional) (Recommended!)

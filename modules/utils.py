@@ -3,7 +3,7 @@ import modules.notifications.discord as discord
 import modules.reddit as reddit
 from modules.config.configuration import config
 from modules.notifications import ntfy, sms
-from modules.url_shorteners import TinyURL, SLExpectOVH, SLPowerPCFanXYZ
+from modules.url_shorteners import TinyURL, SLExpectOVH, BlinkLink
 from modules.timestamp_generators import reddit_timestamp_creator, reddit_account_age_timestamp_generator
 from modules.colors.ansi_codes import RESET, RED, GREEN, BLUE, YELLOW, WHITE, PURPLE, CYAN, SUPER_LIGHT_CYAN, ORANGE
 
@@ -52,9 +52,9 @@ def print_new_post(
     elif config.sl_expect_ovh:
         expect = SLExpectOVH()
         url = expect.shorten(url, timeout=8)
-    elif config.sl_powerpcfan_xyz:
-        ppc = SLPowerPCFanXYZ()
-        url = ppc.shorten(url, timeout=8)
+    elif config.blinklink:
+        bl = BlinkLink()
+        url = bl.shorten(url, timeout=8)
     else:
         url = url
 

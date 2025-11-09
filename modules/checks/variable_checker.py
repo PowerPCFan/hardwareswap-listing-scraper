@@ -49,7 +49,7 @@ def check():
                 "Please ensure your config.json has all the proper values filled in."
             )
 
-        if sum(bool(x) for x in [config.tinyurl, config.sl_expect_ovh, config.sl_powerpcfan_xyz]) > 1:
+        if sum(bool(x) for x in [config.tinyurl, config.sl_expect_ovh, config.blinklink]) > 1:
             raise ValueError(
                 "You cannot have more than one URL shortener enabled at once.\n"
                 "Please choose one and disable the others in your config.json file."

@@ -52,9 +52,9 @@ class SLExpectOVH:
             return url
 
 
-class SLPowerPCFanXYZ:
+class BlinkLink:
     def __init__(self) -> None:
-        self.api = "https://sl.powerpcfan.xyz/api/shorten"
+        self.api = "https://blinkl.ink/api/shorten"
         # These headers are probably not necessary but I just included them because yes
         self.headers = {
             "accept": "*/*",
@@ -64,19 +64,13 @@ class SLPowerPCFanXYZ:
             "sec-fetch-dest": "empty",
             "sec-fetch-mode": "cors",
             "sec-fetch-site": "same-origin",
-            "referer": "https://sl.powerpcfan.xyz/"
         }
 
     def shorten(self, url: str, timeout: float | int) -> str:
         try:
             response = requests.post(self.api, json={"url": url}, headers=self.headers, timeout=timeout)
             if response.status_code == 200:
-                json: dict = response.json()
-                short: str = json.get("short", url)
-                if short == url:
-                    return url
-                else:
-                    return short
+                return response.json().get("short", url)
             else:
                 raise Exception("Error shortening URL.")
         except Exception as e:

@@ -68,7 +68,7 @@ def ensure_all_values_are_present():
         "retrieve_older_posts": False,
         "tinyurl": False,
         "sl_expect_ovh": False,
-        "sl_powerpcfan_xyz": False,
+        "blinklink": False,
         "push_notifications": False,
         "topic_name": "",
         "sms": False,
@@ -84,7 +84,8 @@ def ensure_all_values_are_present():
     deprecated_keys = [
         "firehose",
         "match",
-        "match_llm"
+        "match_llm",
+        "sl_powerpcfan_xyz"  # moved to blinklink key
     ]
 
     # load config.json
@@ -132,7 +133,7 @@ class Config:
 
     tinyurl: bool
     sl_expect_ovh: bool
-    sl_powerpcfan_xyz: bool
+    blinklink: bool
 
     push_notifications: bool
     topic_name: str
